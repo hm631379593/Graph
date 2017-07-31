@@ -21,6 +21,9 @@ struct Vertex
 	Edge*adjacent;
 	//边链表的头指针
 };
+
+
+
 class Graph_List {
 private:
 	Vertex*Head;
@@ -40,6 +43,19 @@ public:
 	void DeleteVertex(int v);
 	int  GetNextNeighbor(int v1, int v2);
 	void DeleteEdge(int v1, int v2);
+
+	/*
+	*
+	* 一个给定的图的邻接矩阵表示是唯一的，但对于邻接表来说，如果边的输入
+	* 先后的次序不一样，生成的邻接表表示也不一样。因此对于同样的一个图的
+	* 给予邻接矩阵表示的遍历所得到的DFS序列或BFS序列是唯一的，基于邻接表
+	* 表示的遍历得到的DFS序列或BFS序列可以是不唯一的。
+	*
+	*
+	* 用广度优先搜索算法遍历图与深度优先搜索算法遍历图的唯一的区别是邻接点搜素次序不同，
+	* 总的时间复杂度都一样
+	*/
+
 	//采用递归的算法从顶点表的第一个顶点开始对图进行深度优先的搜素。
 	void DepthFirstSerach();
 	//采用迭代的方法从指定的顶点v开始进行图的深度优先搜索
@@ -59,6 +75,12 @@ public:
 	void DshortestPath(int v);
 	//求图中任意两点之间的最短路径使用邻接矩阵实现
 	void AllLength();
+
+	/*
+	*
+	*  连通图的最小生成树通常不是唯一的，但是最小生成树边上的权值之和是唯一的。
+	*
+	*/
 	//构造最小之支撑树的普里姆算法
 	void Prim();
 

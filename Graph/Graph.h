@@ -33,18 +33,37 @@ public:
 	void CriticalPath();
 	//在非权图中求指定定点到达其他所有顶点的最短路径
 	void ShortestPath(int v);
+
+	/*
+	*
+	*  连通图的最小生成树通常不是唯一的，但是最小生成树边上的权值之和是唯一的。
+	*  最小生成树的构造方法有Prim算法和Kruskal算法
+	*
+	*/
 	//构造最小之支撑树的普里姆算法
 	void Prim();
+
+	/*
+	*
+	*  最短路径的问题分为两种：
+	*              1. 求从某一个顶点出发到其余各点的最短距离  Dijkstra算法
+	*              2. 求图中每对顶点之间的最短距离       Floyd算法
+	*
+	*/
 	//求任意两点之间的最短距离
-	void AllLength();
+	void  Floyd();
 
 
 
 };
-//求图中任意两点之间的最短路径
-//其中Eage[n][n]是有两个顶点的图的邻接矩阵；A[i][j]是顶点Vi到Vj的最短路径长度
-//Path[i][j]是相应路径上顶点j的前一个顶点的序号。
-void Graph::AllLength() {
+/*
+*
+*  求图中任意两点之间的最短路径
+*  其中Eage[n][n]是有两个顶点的图的邻接矩阵；A[i][j]是顶点Vi到Vj的最短路径长度
+*  Path[i][j]是相应路径上顶点j的前一个顶点的序号。
+*
+*/
+void Graph::Floyd() {
 	int n = GraphSize;
 	int **path = new int*[n];
 	int **A = new int*[n];
