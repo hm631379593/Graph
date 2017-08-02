@@ -83,6 +83,9 @@ public:
 	*/
 	//构造最小之支撑树的普里姆算法
 	void Prim();
+	//通过深度遍历找出图中的关节点
+	void FindArticul(int V);
+	void DFSArticul(int v,int*visited);
 private:
 	void RDFS();
 
@@ -428,4 +431,47 @@ void Graph_List::DshortestPath(int v) {
 	delete[]path;
 	delete[]dist;
 	delete[]s;
+}
+
+/*
+*
+*  连通图G以邻接矩阵作为存储矩阵，查找并输出G中的全部关节点
+*
+*/
+void Graph_List::FindArticul(int v) {
+	int * visited = new int[GraphSize];
+	// 全局遍历count用于对访问计数
+	int count = 1;
+	//设置邻接表上0号顶点为生成树的根，其他的初始化为0
+	visited[0] = 1;
+	for (int i = 1; i < GraphSize; i++) {
+		visited[i] = 0;
+	}
+	int p = GetFirstNeighbor(v);
+	//从顶点v出发深度优先查找关节点
+	DFSArticul(p,visited);
+	//生成树至少有两棵子数
+	if (count < GraphSize) {
+		//根节点是关节点，输出
+		cout << "root node is articul: " << v << endl;
+		int w = v;
+		while (GetNextNeighbor(w,p)!=-1) {
+			p = GetNextNeighbor(w, p);
+			w = p;
+			if (visited[w] == 0) {
+				DFSArticul(w, visited);
+			}
+
+		}
+	}
+}
+/*
+*
+*    从顶点 v出发深度遍历图，查找并输出关节点
+*  
+*/
+void Graph_List::DFSArticul(int v, int*visited) {
+
+	int min;
+
 }
