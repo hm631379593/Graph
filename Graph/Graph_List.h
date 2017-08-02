@@ -83,6 +83,8 @@ public:
 	*/
 	//构造最小之支撑树的普里姆算法
 	void Prim();
+private:
+	void RDFS();
 
 
 };
@@ -100,6 +102,29 @@ void Graph_List::DepthFirstSerach() {
 	//从序号为0的定点出发，深度优先遍历图
 	delete[]visited;
 }
+
+
+/*
+*
+*  要判定一个无向图是否为连通图，或有几个连通分量，可以设置一个计数变量count
+*  初始值取值为0，在调用RDFS算法时加一，这样当这个算法结束的时候，依据count的值
+*  就可以确定图的连通性和连通分量的个数
+*
+*/
+void Graph_List::RDFS() {
+	int* visited = new int[GraphSize];
+	int count = 0;
+	for (int i = 0; i < GraphSize; i++)
+		visited[i] = 0;
+	for (int i = 0; i < GraphSize; i++) {
+		if (visited[i] == 0) {
+			count++;
+			RDFS(i, visited);
+		}
+	}
+}
+
+
 /*
 *
 * 采用递归的方法从指定的顶点v开始进行图的深度优先搜索
